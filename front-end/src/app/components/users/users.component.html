@@ -1,0 +1,83 @@
+<app-nav></app-nav>
+<br>
+<div class="container">
+    <div class="row gx-5">
+    <div class="col-6">
+<div class="card text-center">
+    <h5 class="card-title mt-2">Registre un usuario</h5>
+    <div class="card-body">
+        <form #userForm="ngForm" (ngSubmit)="addUser(userForm)">
+            <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="userService.selectedUser._id">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Nombre Usuario</label>
+                <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="userService.selectedUser.nombre" class="form-control" >
+
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email Usuario</label>
+                <input type="email" name="email" #email="ngModel" [(ngModel)]="userService.selectedUser.email" class="form-control" >
+
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Password Usuario</label>
+                <input type="text" name="password" #password="ngModel" [(ngModel)]="userService.selectedUser.password" class="form-control" >
+
+              </div>
+              <label for="exampleInputEmail1" class="form-label">Estado</label>
+              <div class="mb-3">
+                <input type="text" value="false" name="estado" #estado="ngModel" [(ngModel)]="userService.selectedUser.estado" class="form-control"  >
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Telefono Usuario</label>
+                <input type="text" name="telefono" #telefono="ngModel" [(ngModel)]="userService.selectedUser.telefono" class="form-control" >
+              </div>
+              <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Rol</label>
+              <select  name="rol" #rol="ngModel" [(ngModel)]="userService.selectedUser.rol" class="form-select" aria-label="Default select example">
+                <option value="USER">Usuario</option>
+                <option value="ADMIN">Admin</option>
+              </select>
+              </div>
+              <div class="card-footer">
+                <button class="btn btn-primary">Guardar</button>
+                <!--<button  (click)="resetForm(userForm)" class="btn btn-dark">Limpiar</button>-->
+              </div>
+        </form>
+    </div>
+</div>
+</div>
+<div class="col-6">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Rol</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Email</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Operaciones</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of userService.users">
+            <th> {{user.nombre}} </th>
+            <td> {{user.rol}} </td>
+            <td> {{user.telefono}} </td>
+            <td> {{user.email}} </td>
+            <td> {{user.estado}} </td>
+            <td>
+              <a (click)="editUser(user)">
+                  <i class="material-icons">edit</i>
+              </a>
+              <a (click)="deleteUser(user._id)">
+                  <i class="material-icons">delete</i>
+              </a>
+          </td>
+
+          </tr>
+        </tbody>
+      </table>
+</div>
+</div>
+</div>

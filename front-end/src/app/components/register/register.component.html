@@ -1,0 +1,178 @@
+<br><br>
+<div class="container">
+
+<div class="card text-center">
+  <h5 class="card-title mt-2">Registrate</h5>
+  <div class="card-body">
+      <form #userForm="ngForm" (ngSubmit)="addUser(userForm)">
+          <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="userService.selectedUser._id">
+          <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Nombre Usuario</label>
+              <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="userService.selectedUser.nombre" class="form-control" >
+
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email Usuario</label>
+              <input type="email" name="email" #email="ngModel" [(ngModel)]="userService.selectedUser.email" class="form-control" >
+
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Password Usuario</label>
+              <input type="password" name="password" #password="ngModel" [(ngModel)]="userService.selectedUser.password" class="form-control" >
+
+            </div>
+            <div class="mb-3">
+              <input type="hidden" value="false" name="estado" #estado="ngModel" [(ngModel)]="userService.selectedUser.estado" class="form-control"  >
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Telefono Usuario</label>
+              <input type="text" name="telefono" #telefono="ngModel" [(ngModel)]="userService.selectedUser.telefono" class="form-control" >
+            </div>
+            <div class="mb-3">
+              <input type="hidden" value="USER" name="rol" #rol="ngModel" [(ngModel)]="userService.selectedUser.rol" class="form-select" aria-label="Default select example">
+            </div>
+            <div class="mb-3 row align-items-center">
+              <div class="col">
+                <div class="form-check">
+                  <input  name="terms" #terms="ngModel" [(ngModel)]="userService.selectedUser.terms" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Acepto los terminos y condiciones
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+              Términos y Condiciones
+            </button>
+          </div>
+          
+          </div>
+            <div class="mb-3 row align-items-center">
+              <div class="col">
+                <div class="form-check">
+                  <input  name="norms" #norms="ngModel" [(ngModel)]="userService.selectedUser.norms" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Acepto las Normas de Convivencia 
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
+              Normas de Convivencia de Huespedes
+            </button>
+          </div>
+          
+          </div>
+            <div class="card-footer">
+              <button class="btn btn-success">Registrar</button>
+              <!--<button  (click)="resetForm(userForm)" class="btn btn-dark">Limpiar</button>-->
+            </div>
+      </form>
+</div>
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Términos y Condiciones para Clientes de Hotel</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div>
+<br>
+        <b class="text center">Bienvenido (Nombre del cliente)</b>
+        <br><br>
+        <p>Estamos encantados de tenerte como nuestro huésped. Antes de disfrutar de tu estancia, te pedimos que leas y aceptes los siguientes términos y condiciones:</p>
+         
+       <b>Reservas:</b> 
+       <ul>
+        <li> Las reservas están sujetas a disponibilidad y confirmación por parte del hotel.</li>
+        <li> Los precios pueden variar según la temporada y la duración de la estancia.</li>
+        <li>Se requiere una tarjeta de crédito válida para garantizar la reserva. El pago se realizará al momento del check-in.</li>
+       </ul>
+        <b>Check-in y Check-out:</b>
+        <li>El check-in comienza a las [hora] y el check-out debe realizarse antes de las [hora]. Sujeto a disponibilidad, podemos ofrecer check-in temprano o check-out tardío con un cargo adicional.</li>
+        <li>Se requerirá una identificación válida al momento del check-in.</li>
+       <b>Cancelaciones y Modificaciones:</b>    
+        <li>Las cancelaciones deben realizarse con al menos [número] horas de antelación para evitar cargos. Consulta las políticas de cancelación al realizar la reserva.</li>
+        <li>Las modificaciones están sujetas a disponibilidad y pueden estar sujetas a cargos adicionales.</li>
+       <b>Política de Niños y Camas Supletorias:</b>
+        <li>Los niños menores de [edad] se hospedan con un menor costo al normal y utilizaran las camas existentes.</li>
+        <li>Se pueden proporcionar camas supletorias por un cargo adicional, sujeto a disponibilidad.</li>
+       <b>Conducta del Huésped:</b> 
+        <li>Se espera que los huéspedes respeten las normas de convivencia y el bienestar de los demás huéspedes y el personal del hotel.</li>
+        <li>El hotel se reserva el derecho de rescindir la estadía de cualquier huésped que viole las políticas del hotel sin reembolso.</li>     
+        
+         <b>Servicios y Comodidades:</b>
+         <li>El hotel no se hace responsable por la pérdida o daño de objetos de valor. Se recomienda utilizar las cajas de seguridad proporcionadas.</li>
+         <li> Algunos servicios y comodidades pueden estar sujetos a cargos adicionales. Consulta con la recepción para obtener más información.</li>
+         <b>Responsabilidad:</b>     
+        <li>El hotel no se hace responsable por lesiones, pérdidas o daños a la propiedad, a menos que sea causado por negligencia demostrada del hotel.</li>
+        <br>     
+        <p>Al hacer una reserva en [Nombre del Hotel], aceptas y te comprometes a cumplir con estos términos y condiciones. Nos esforzamos por brindar una experiencia excepcional y agradecemos tu cooperación.</p>
+        <b>¡Esperamos que disfrutes de tu estancia con nosotros!</b>
+      </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Entendido</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Normas de Convivencia de Huespedes</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div>
+<br>
+        <b class="text center">Bienvenido (Nombre del cliente)</b>
+        <br><br>
+        <p>Bienvenidos para hacer más placentera su estadía le informamos algunos aspectos a tener en cuenta. El huésped debe respetar  las normas usuales de educación, higiene y convivencia social hacia las personas. Respetar las instalaciones del establecimiento. A continuación los cuatro items importantes que el cliente debe saber sobre: "Horarios" , "Queda estrictamente prohibido a los huéspedes..." , "Servicios y uso de la habitación" y "Cochera".</p>
+         
+       <b>Horarios</b> 
+       <ul>
+        <li> En horas del medio día o noche, se ruega mantener el silencio en todo el hotel. Recuerde que hay gente durmiendo.
+        </li>
+        <li> Al registrarse todos los pasajeros deben presentar DNI o PASAPORTE de todos de todos sus acompañantes. La persona que no presente documento, no podrá alojarse.</li>
+        <li>Si reserva por  Despegar, Booking o Expedia , imprima el comprobante de su  reserva y lea atentamente el importe total a pagar en el hotel. Trabajamos únicamente con tarjeta Visa. </li>
+      <li>Antes cualquier pedido especial,  debe avisar de antemano al momento de hacer la reserva. 
+      </li>
+      </ul>
+        <b>Queda estrictamente prohibido a los huésped</b>
+        <li>Fumar en cualquier sector (habitaciones, baños, pasillos, etc.) del Hotel Residencial Colon (habitaciones, baños, departamentos, pasillos, etc). En caso de  querer fumar, el cliente debe salir a la vereda del hotel.
+        </li>
+        <li>Ingresar con bebidas alcohólicas o en estado de ebriedad.</li>
+       <li>Recibir visitas de cualquier tipo dentro de la habitación.</li>
+       <li>Tirar Yerba en la pileta de la habitación o inodoro. En planta baja tiene a su disposición una pileta y basurero para limpiar su mate.</li> 
+       <li> Dejar la puerta o ventanas abiertas, permaneciendo que se vea el interior de la habitación.</li>
+       <li>Andar con el torso desnudo por los pasillos y mantener siempre la puerta cerrada de la habitación. En caso de tener o notar algún desperfecto en la habitación por favor avise en recepción. No intente solucionarlo solo. </li>
+       <li>Prohibido ingresar con comida dentro de la habitación.</li>
+      <li> Prohibido alojar un mayor número de personas de las que correspondan a la capacidad permitida de cada habitación.</li>
+       <b>Servicios y uso de la habitación </b>    
+        <li>Al salir de la habitación debe apagar las luces, tv, aire acondicionado y otros artefactos eléctricos. 
+        </li>
+        <li>Al retirarse de la habitación la llave debe quedar en recepción. </li>
+       <li>Una vez desocupada la habitación, si usted por algún motivo quiere dejar el vehículo (por la mañana) en nuestra cochera puede hacerlo sin ningún problema. Este servicio no tiene ningún costo.</li>
+       <li>Tenemos a disposición (sin cargo) dos bicicletas para el uso del cliente. Sujeto a disponibilidad.</li> 
+      <li>El uso de Internet wi-fi es libre (solicite contraseña). </li>
+       <li>El aire acondicionado ya se encuentran regulado en temperatura, se prende y apaga desde la térmica que se encuentra debajo del mismo.</li>
+      <li>Si tiene el aire acondicionado prendido asegúrese de cerrar puertas y ventanas. </li>
+      <li>La habitación cuenta con agua caliente únicamente en la ducha. Para regular la temperatura usted debe abrir la canilla – de la ducha – y cerrar regulando la temperatura que desea. </li> 
+     
+     
+      <b>Cochera</b>
+        <li>Los vehículos  que entren  en la cochera no tienen lugar fijo, ni exclusivos, sujeto a la capacidad del estacionamiento. En caso de querer salir con su vehículo por la noche o antes de las 8:00 de la mañana, el cliente debe  avisar en recepción  para colocar su coche en los primeros lugares. Porque si la cochera está llena, su auto puede quedar atascado por otros vehículos. En temporada los autos se suelen colocar en el pasillo del garaje.</li>
+        <li>Desactive la alarma de su vehículo.</li>
+      <li>Pre-caliente su vehículo fuera del garage del hotel.</li>
+      </div>      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Entendido</button>
+      </div>
+    </div>
+  </div>
+</div>

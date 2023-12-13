@@ -1,0 +1,64 @@
+<!--<div class="login">
+  <div class="login-triangle"></div>
+  
+  <h2 class="login-header">Log in</h2>
+
+  <form #formLogin="ngForm" (ngSubmit)="onLogin(formLogin)" class="login-container">
+    <p><input  name="email" ngModel required type="email" placeholder="Email"></p>
+    <p><input name="password"  ngModel required type="password" placeholder="Password"></p>
+    <p><input  type="submit" value="Send"></p>
+  </form>
+</div> -->
+
+<section class="h-100 gradient-form" style="background-color: #eee;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-xl-10">
+        <div class="card rounded-3 text-black">
+          <div class="row g-0">
+            <div class="col-lg-6">
+              <div class="card-body p-md-5 mx-md-4">
+                <div class="text-center">
+                  <img src="/assets/img/logoh.jpg"
+                    style="width: 220px;" alt="logo">
+                </div>
+
+                <form #formLogin="ngForm" (ngSubmit)="onLogin(formLogin)" class="login-container">
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form2Example11">Email</label>
+                    <p><input class="form-control" name="email" ngModel required type="email" placeholder="ejemplo@yavirac.edu.ec"></p>
+                    
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form2Example22">Password</label>
+                    <p><input class="form-control" name="password"  ngModel required type="password" placeholder="**"></p>
+                    
+                  </div>
+
+                  <div class="text-center pt-1 mb-5 pb-1">
+                    <p><input class="btn btn-primary btn-block fa-lg  mb-3" type="submit" value="Loguearse"></p> <br>
+                    <a class="text-muted" routerLink="/register">No tienes cuenta ? Registrate!</a>
+                  </div>
+                </form>
+
+              </div>
+            
+            </div>
+          
+            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+              <div class="filtrong">
+                
+              </div>
+
+            </div>
+          
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</section>
+
