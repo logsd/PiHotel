@@ -1,0 +1,86 @@
+<app-nav></app-nav>
+<br>
+<h1 class="text-center">Habitaciones</h1>
+  <br>
+  <div class="container">
+      <div class="row gx-5">
+      <div class="col-6">
+  <div class="card text-center">
+      <h5 class="card-title mt-2">Registre una Habitacion</h5>
+      <div class="card-body">
+          <form #habitacionForm="ngForm" (ngSubmit)="addHabitacion(habitacionForm)">
+              <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="habitacionService.selectedHabitacion._id">
+              <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Numero de Habitacion</label>
+                  <input type="text" name="numero" #numero="ngModel" [(ngModel)]="habitacionService.selectedHabitacion.numero" class="form-control" >
+
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Piso de la Habitacion</label>
+                    <input type="text" name="piso" #piso="ngModel" [(ngModel)]="habitacionService.selectedHabitacion.piso" class="form-control" >
+                  </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Descripcion de la Habitacion</label>
+                    <textarea name="descripcion" #descripcion="ngModel" [(ngModel)]="habitacionService.selectedHabitacion.descripcion" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                  </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Caracteristicas</label>
+                    <textarea name="caracteristicas" #caracteristicas="ngModel" [(ngModel)]="habitacionService.selectedHabitacion.caracteristicas" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Precio Diario</label>
+                    <input type="number" step="any" name="precioDiario" #precioDiario="ngModel" [(ngModel)]="habitacionService.selectedHabitacion.precioDiario" class="form-control" >
+
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Estado de la Habitacion</label>
+                    <select name="estado" #estado="ngModel" [(ngModel)]="habitacionService.selectedHabitacion.estado" class="form-select" aria-label="Default select example">
+                        <option value="1">Ocupada</option>
+                        <option value="0">Desocupada</option>
+                      </select>
+
+                  </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Tipo de Habitacion</label>
+                  <input type="text" name="tipo" #tipo="ngModel" [(ngModel)]="habitacionService.selectedHabitacion.tipo" class="form-control"  >
+                </div>
+                <div class="card-footer">
+                  <button class="btn btn-primary">Guardar</button>
+                  <button  (click)="resetForm(habitacionForm)" class="btn btn-dark">Limpiar</button>
+                </div>
+          </form>
+      </div>
+  </div>
+  </div>
+  <div class="col-6">
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Numero</th>
+              <th scope="col">Piso</th>
+              <th scope="col">Precio Diario</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Tipo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let habitacion of habitacionService.habitaciones">
+              <th> {{habitacion.numero}} </th>
+              <td> {{habitacion.piso}} </td>
+              <th> {{habitacion.precioDiario}} </th>
+              <td> {{habitacion.estado}} </td>
+              <td> {{habitacion.tipo}} </td>
+              <td>
+                  <a (click)="editHabitacion(habitacion)">
+                      <i class="material-icons">edit</i>
+                  </a>
+                  <a (click)="deleteHabitacion(habitacion._id)">
+                      <i class="material-icons">delete</i>
+                  </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+  </div>
+  </div>
+  </div>

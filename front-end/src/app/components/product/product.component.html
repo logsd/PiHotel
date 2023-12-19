@@ -1,0 +1,68 @@
+<app-nav></app-nav>
+<br>
+<h1 class="text-center">Productos</h1>
+  <br>
+  <div class="container">
+      <div class="row gx-5">
+      <div class="col-6">
+  <div class="card text-center">
+      <h5 class="card-title mt-2">Registre un Producto</h5>
+      <div class="card-body">
+          <form #productForm="ngForm" (ngSubmit)="addProduct(productForm)">
+              <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="productService.selectedProduct._id">
+              <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Nombre del Producto</label>
+                  <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="productService.selectedProduct.nombre" class="form-control" >
+
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Descripcion del Producto</label>
+                    <textarea name="descripcion" #descripcion="ngModel" [(ngModel)]="productService.selectedProduct.descripcion" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Precio Unitario</label>
+                    <input type="text" step="any" name="precio" #precio="ngModel" [(ngModel)]="productService.selectedProduct.precio" class="form-control" >
+
+                  </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Stock</label>
+                  <input type="text" name="stock" #stock="ngModel" [(ngModel)]="productService.selectedProduct.stock" class="form-control"  >
+                </div>
+                <div class="card-footer">
+                  <button class="btn btn-primary">Guardar</button>
+                  <button  (click)="resetForm(productForm)" class="btn btn-dark">Limpiar</button>
+                </div>
+          </form>
+      </div>
+  </div>
+  </div>
+  <div class="col-6">
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Nombre</th>
+              <th scope="col">Descripcion</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Stock</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of productService.products">
+              <th> {{product.nombre}} </th>
+              <td> {{product.descripcion}} </td>
+              <th> {{product.precio}} </th>
+              <td> {{product.stock}} </td>
+              <td>
+                  <a (click)="editProduct(product)">
+                      <i class="material-icons">edit</i>
+                  </a>
+                  <a (click)="deleteProduct(product._id)">
+                      <i class="material-icons">delete</i>
+                  </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+  </div>
+  </div>
+  </div>

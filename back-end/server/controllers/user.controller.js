@@ -10,7 +10,6 @@ userCtrl.getUsers = async (req,res) => {
 }
 
 userCtrl.createUser = async (req,res) => {
-    
     const newUser ={
         nombre : req.body.nombre,
         email : req.body.email,

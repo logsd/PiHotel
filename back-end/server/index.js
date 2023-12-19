@@ -11,7 +11,12 @@ app.use(express.json());
 app.use(cors({origin: 'http://localhost:4200'}));
 //Routes
 app.use('/api/users',require('./routes/users.routes'));
-app.use('/api/lists',require('./routes/lists.routes'));
+app.use('/api/habitacion',require('./routes/habitacion.routes'));
+app.use('/api/reserva',require('./routes/reserva.routes'));
+app.use('/api/metodo',require('./routes/metodo.pago.routes'));
+app.use('/api/producto',require('./routes/producto.routes'));
+app.use('/api/consumo',require('./routes/consumo.routes'));
+
 //Starting the server
 
 app.listen(app.get('port'), ()=>{

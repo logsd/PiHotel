@@ -1,59 +1,58 @@
+import { Component , OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { List } from 'src/app/models/list';
-import { ListService } from 'src/app/services/list.service';
 import Swal from 'sweetalert2';
+import { Consumo } from 'src/app/models/consumo';
+import { ConsumoService } from 'src/app/services/consumo.service';
 
 @Component({
-  selector: 'app-lists',
-  templateUrl: './lists.component.html',
-  styleUrls: ['./lists.component.css'],
-  providers: [ListService]
+  selector: 'app-consumo',
+  templateUrl: './consumo.component.html',
+  styleUrls: ['./consumo.component.css'],
+  providers: [ConsumoService]
 })
-export class ListsComponent implements OnInit {
-
-  constructor(public listService: ListService) { }
+export class ConsumoComponent implements OnInit {
+  constructor(public consumoService: ConsumoService) { }
 
   ngOnInit(): void {
-    this.getLists()
+    this.getConsumos()
   }
 
-  estado2 = true;
-  addList(form: NgForm){
+  addConsumo(form: NgForm){
     if(form.value._id){
-      this.listService.putList(form.value)
+      this.consumoService.putConsumo(form.value)
         .subscribe(res =>{
           this.resetForm(form)
           Swal.fire({
             position: 'center',
             icon: 'success',
-            title: 'Lista Actualizada Correctamente',
+            title: 'Consumo Actualizada Correctamente',
             showConfirmButton: false,
             timer: 1500
           })
-          this.getLists()
+          this.getConsumos()
 
         })
     } else {
-      this.listService.postList(form.value)
+      this.consumoService.postConsumo(form.value)
       .subscribe({
         next : res => {
         this.resetForm(form)
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: 'Lista creada exitosamente!',
+          title: 'Consumo creado exitosamente!',
           showConfirmButton: false,
           timer: 1500
         })
-        this.getLists()
+        this.getConsumos()
       },
       error : (e:HttpErrorResponse)=>{
+        console.log(e)
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'La lista ya existe!',
+          text: 'El consumo ya existe!',
 
         })
       }
@@ -63,27 +62,27 @@ export class ListsComponent implements OnInit {
 
 
 
-  getLists(){
-    this.listService.getLists()
+  getConsumos(){
+    this.consumoService.getConsumos()
       .subscribe(res => {
-        this.listService.lists =res as List[];
+        this.consumoService.consumos =res as Consumo[];
       });
   }
 
   resetForm(form?: NgForm){
     if(form){
       form.reset();
-      this.listService.selectedList = new List();
+      this.consumoService.selectedConsumo = new Consumo();
     }
   }
 
-  editList(list: List){
-    this.listService.selectedList = list;
+  editProduct(consumo: Consumo){
+    this.consumoService.selectedConsumo = consumo;
   }
 
-  deleteList(_id:string){
+  deleteProduct(_id:string){
     Swal.fire({
-      title: 'Estas seguro de eliminar esta lista?',
+      title: 'Estas seguro de eliminar este Consumo?',
       showDenyButton: true,
       showCancelButton: true,
       confirmButtonText: 'Eliminar',
@@ -91,13 +90,13 @@ export class ListsComponent implements OnInit {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        this.listService.deleteList(_id)
+        this.consumoService.deleteConsumo(_id)
       .subscribe(res =>{
-        this.getLists();
+        this.getConsumos();
       });
         Swal.fire('Eliminado!', '', 'success')
       } else if (result.isDenied) {
-        Swal.fire('Lista no eliminada', '', 'info')
+        Swal.fire('Consumo no eliminado', '', 'info')
       }
     })
 

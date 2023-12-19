@@ -15,7 +15,7 @@ export class RolGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
       if (this._rolService.rol() != 'ADMIN') {
-        this.router.navigate(['/yaviElec']); // go to login if not authenticated
+        this.router.navigate(['/home']); // go to login if not authenticated
         return false;
       }
     return true;

@@ -1,0 +1,74 @@
+<app-nav></app-nav>
+<br>
+<h1 class="text-center">Pagos</h1>
+  <br>
+  <div class="container">
+      <div class="row gx-5">
+      <div class="col-6">
+  <div class="card text-center">
+      <h5 class="card-title mt-2">Registre un Pago</h5>
+      <div class="card-body">
+          <form #metodoForm="ngForm" (ngSubmit)="addMetodo(metodoForm)">
+              <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="metodoService.selectedMetodo._id">
+              <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Tipo de Pago</label>
+                  <input type="text" name="tipo" #tipo="ngModel" [(ngModel)]="metodoService.selectedMetodo.tipo" class="form-control" >
+
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Reserva</label>
+                    <input type="text" name="reserva" #reserva="ngModel" [(ngModel)]="metodoService.selectedMetodo.reserva" class="form-control" >
+                  </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Total</label>
+                    <input type="text" name="total" #total="ngModel" [(ngModel)]="metodoService.selectedMetodo.total" class="form-control" id="exampleFormControlTextarea1" rows="3">
+                  </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Fecha de Emision</label>
+                    <input type="date" name="fechaEmision" #fechaEmision="ngModel" [(ngModel)]="metodoService.selectedMetodo.fechaEmision" class="form-control" id="exampleFormControlTextarea1" rows="3">
+                  </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Fecha de Pago</label>
+                    <input type="date" name="fechaPago" #fechaPago="ngModel" [(ngModel)]="metodoService.selectedMetodo.fechaPago" class="form-control" id="exampleFormControlTextarea1" rows="3">
+                  </div>
+                <div class="card-footer">
+                  <button class="btn btn-primary">Guardar</button>
+                  <button  (click)="resetForm(metodoForm)" class="btn btn-dark">Limpiar</button>
+                </div>
+          </form>
+      </div>
+  </div>
+  </div>
+  <div class="col-6">
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Tipo</th>
+              <th scope="col">Reserva</th>
+              <th scope="col">Total</th>
+              <th scope="col">Fecha Emision</th>
+              <th scope="col">Fecha Pago</th>
+              <th class="col">Operaciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let metodo of metodoService.metodos">
+              <th> {{metodo.tipo}} </th>
+              <td> {{metodo.reserva}} </td>
+              <th> {{metodo.total}} </th>
+              <td> {{metodo.fechaEmision}} </td>
+              <td> {{metodo.fechaPago}} </td>
+              <td>
+                  <a (click)="editMetodo(metodo)">
+                      <i class="material-icons">edit</i>
+                  </a>
+                  <a (click)="deleteMetodo(metodo._id)">
+                      <i class="material-icons">delete</i>
+                  </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+  </div>
+  </div>
+  </div>

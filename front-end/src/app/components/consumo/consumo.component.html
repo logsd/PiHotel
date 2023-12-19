@@ -1,0 +1,74 @@
+<app-nav></app-nav>
+<br>
+<h1 class="text-center">Consumos</h1>
+  <br>
+  <div class="container">
+      <div class="row gx-5">
+      <div class="col-6">
+  <div class="card text-center">
+      <h5 class="card-title mt-2">Registre un Consumo</h5>
+      <div class="card-body">
+          <form #consumoForm="ngForm" (ngSubmit)="addConsumo(consumoForm)">
+              <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="consumoService.selectedConsumo._id">
+              <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Nombre de la reserva</label>
+                  <input type="text" name="reserva" #reserva="ngModel" [(ngModel)]="consumoService.selectedConsumo.reserva" class="form-control" >
+
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Nombre del producto</label>
+                    <textarea name="producto" #producto="ngModel" [(ngModel)]="consumoService.selectedConsumo.producto" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Cantidad</label>
+                    <input type="text" step="any" name="cantidad" #cantidad="ngModel" [(ngModel)]="consumoService.selectedConsumo.cantidad" class="form-control" >
+
+                  </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Precio Venta</label>
+                  <input type="text" name="precioVenta" #precioVenta="ngModel" [(ngModel)]="consumoService.selectedConsumo.precioVenta" class="form-control"  >
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Estado</label>
+                  <input type="text" name="estado" #estado="ngModel" [(ngModel)]="consumoService.selectedConsumo.estado" class="form-control"  >
+                </div>
+                <div class="card-footer">
+                  <button class="btn btn-primary">Guardar</button>
+                  <button  (click)="resetForm(consumoForm)" class="btn btn-dark">Limpiar</button>
+                </div>
+          </form>
+      </div>
+  </div>
+  </div>
+  <div class="col-6">
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Reserva</th>
+              <th scope="col">Producto</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Precio Venta</th>
+              <th scope="col">Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let consumo of consumoService.consumos">
+              <th> {{consumo.reserva}} </th>
+              <td> {{consumo.producto}} </td>
+              <th> {{consumo.cantidad}} </th>
+              <td> {{consumo.precioVenta}} </td>
+              <td> {{consumo.estado}} </td>
+              <td>
+                  <a (click)="editProduct(consumo)">
+                      <i class="material-icons">edit</i>
+                  </a>
+                  <a (click)="deleteProduct(consumo._id)">
+                      <i class="material-icons">delete</i>
+                  </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+  </div>
+  </div>
+  </div>

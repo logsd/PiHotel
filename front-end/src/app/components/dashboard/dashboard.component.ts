@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit {
     type Timer = ReturnType<typeof setTimeout>;
 
     const timer: Timer = setTimeout(() => {
-     this.router.navigate(['/yaviElec'])
+     this.router.navigate(['/home'])
     }, 2000);
   }
 }
