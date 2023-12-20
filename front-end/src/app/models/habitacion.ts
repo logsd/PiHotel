@@ -1,5 +1,5 @@
 export class Habitacion {
-    constructor(_id = '', numero = '', piso = '', descripcion = '', caracteristicas = '', precioDiario= 0,estado = false, tipo=''){
+    constructor(_id = '', numero = '', piso = '', descripcion = '', caracteristicas = '', precioDiario= 0,estado = '', tipo=''){
         this._id = _id;
         this.numero = numero;
         this.piso = piso;
@@ -15,6 +15,6 @@ export class Habitacion {
     descripcion: string;
     caracteristicas: string;
     precioDiario: number;
-    estado: boolean;
+    estado: string;
     tipo: string;
 }

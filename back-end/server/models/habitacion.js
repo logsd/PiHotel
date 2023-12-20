@@ -17,7 +17,7 @@ const HabitacionSchema = new Schema({
         type: Number
     },
     estado: {
-        type: Boolean
+        type: String
     },
     tipo: {
        type: String

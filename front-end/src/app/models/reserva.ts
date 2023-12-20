@@ -5,11 +5,13 @@ export class Reserva {
     _id: string | undefined;
     cliente: User| undefined;
     habitacion: Habitacion| undefined;
+    codigo: string | undefined;
+    uri: string | undefined;
     tipoReserva: string| undefined;
     fechaReserva: string| undefined;
     fechaEntrada: string| undefined;
     fechaSalida: string| undefined;
     costoAlojamiento: number| undefined;
-    estado: boolean| undefined;
+    estado:string| undefined;
 
 }

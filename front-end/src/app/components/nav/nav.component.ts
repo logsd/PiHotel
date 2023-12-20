@@ -34,6 +34,7 @@ export class NavComponent implements OnInit {
       admin1.style.display = 'none';
       admin2.style.display = 'none';
       admin3.style.display = 'none';
+      admin4.style.display = 'none';
       //alert('No mostrar cosas de admin') // go to login if not authenticated
       return false;
     }

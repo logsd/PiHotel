@@ -9,7 +9,7 @@ export class ConsumoService {
 
   selectedConsumo: Consumo;
   consumos: Consumo[] | undefined;
-  readonly URL_API = 'http://localhost:3000/api/producto';
+  readonly URL_API = 'http://localhost:3000/api/consumo';
 
     
   constructor(private http:HttpClient) { 

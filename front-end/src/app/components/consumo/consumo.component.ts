@@ -1,22 +1,31 @@
 import { Component , OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
+import { ReservaService } from 'src/app/services/reserva.service';
+import { ProductService } from 'src/app/services/product.service';
 import Swal from 'sweetalert2';
 import { Consumo } from 'src/app/models/consumo';
 import { ConsumoService } from 'src/app/services/consumo.service';
+import { Reserva } from 'src/app/models/reserva';
+import { Product } from 'src/app/models/product';
 
 @Component({
   selector: 'app-consumo',
   templateUrl: './consumo.component.html',
   styleUrls: ['./consumo.component.css'],
-  providers: [ConsumoService]
+  providers: [ConsumoService, ReservaService, ProductService]
 })
 export class ConsumoComponent implements OnInit {
-  constructor(public consumoService: ConsumoService) { }
+  constructor(public consumoService: ConsumoService, public reservaService: ReservaService, public productService: ProductService) { }
 
+
+  consumo = new Consumo();
   ngOnInit(): void {
     this.getConsumos()
+    this.getProducts()
+    this.getReservas()
   }
+
 
   addConsumo(form: NgForm){
     if(form.value._id){
@@ -34,7 +43,13 @@ export class ConsumoComponent implements OnInit {
 
         })
     } else {
-      this.consumoService.postConsumo(form.value)
+      this.consumo.reserva = form.value.reserva;
+      this.consumo.producto = form.value.producto;
+      this.consumo.cantidad = form.value.cantidad;
+      this.consumo.precioVenta  = form.value.precioVenta;
+      this.consumo.estado = form.value.estado;
+      this.consumoService
+      .postConsumo(this.consumo)
       .subscribe({
         next : res => {
         this.resetForm(form)
@@ -60,6 +75,19 @@ export class ConsumoComponent implements OnInit {
     }
   }
 
+  getReservas(){
+    this.reservaService.getReservas()
+      .subscribe(res => {
+        this.reservaService.reservas =res as Reserva[];
+      });
+  }
+
+  getProducts(){
+    this.productService.getProducts()
+      .subscribe(res => {
+        this.productService.products =res as Product[];
+      });
+  }
 
 
   getConsumos(){
@@ -76,11 +104,11 @@ export class ConsumoComponent implements OnInit {
     }
   }
 
-  editProduct(consumo: Consumo){
+  editConsumo(consumo: Consumo){
     this.consumoService.selectedConsumo = consumo;
   }
 
-  deleteProduct(_id:string){
+  deleteConsumo(_id:any){
     Swal.fire({
       title: 'Estas seguro de eliminar este Consumo?',
       showDenyButton: true,

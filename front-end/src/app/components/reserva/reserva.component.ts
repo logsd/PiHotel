@@ -18,13 +18,13 @@ import * as moment from 'moment';
 export class ReservaComponent implements OnInit{
   constructor(public habitacionService: HabitacionService, public loginService: LoginService, public reservaService : ReservaService) { }
 
-estado1 = true;    
+estado1 = 'Reservado';
+estado2 = 'Sin Reserva';   
   tipo1 = "In Situs"
   reserva = new Reserva();
   ngOnInit(): void {
     this.getReservas()
     this.getHabitaciones()
-    console.log(this.loginService.getUser())
   }
 
   addReserva(form: NgForm){
@@ -43,7 +43,18 @@ estado1 = true;
 
         })
     } else {
-      this.reservaService.postReserva(form.value)
+      this.reserva.cliente = this.loginService.getUser();
+  this.reserva.habitacion = form.value.habitacion;
+  this.reserva.codigo = form.value.codigo;
+  this.reserva.uri = form.value.habitacion;
+  this.reserva.tipoReserva  = form.value.tipoReserva;
+  this.reserva.fechaReserva = moment().format('MMMM Do YYYY, h:mm:ss a');
+  this.reserva.fechaEntrada = moment(form.value.fechaEntrada).subtract(10, 'days').calendar(); 
+  this.reserva.fechaSalida= moment(form.value.fechaSalida).subtract(10, 'days').calendar();
+  this.reserva.costoAlojamiento = form.value.costoAlojamiento;
+  this.reserva.estado = this.estado1;
+  this.reservaService
+  .postReserva(this.reserva)
       .subscribe({
         next : res => {
         this.resetForm(form)
@@ -62,45 +73,13 @@ estado1 = true;
           icon: 'error',
           title: 'Oops...',
           text: 'La Reserva ya existe!',
+          timer: 1500
 
         })
+        this.getReservas()
       }
       })
     }
-  }
-
-  reservando(form: NgForm){
-  this.reserva.cliente = this.loginService.getUser();
-  this.reserva.habitacion = form.value._id;
-  this.reserva.tipoReserva  = this.tipo1;
-  this.reserva.fechaReserva = moment().format('MMMM Do YYYY, h:mm:ss a');
-  this.reserva.fechaEntrada = moment(form.value.fechaEntrada).subtract(10, 'days').calendar(); 
-  this.reserva.fechaSalida= moment(form.value.fechaSalida).subtract(10, 'days').calendar();
-  this.reserva.costoAlojamiento = form.value.costoAlojamiento;
-  this.reserva.estado = this.estado1;
-  this.reservaService
-  .postReserva(this.reserva)
-  .subscribe(
-    
-    (res) => {
-      this.resetForm(form)
-
-      Swal.fire(
-        'Postulación Exitosa',
-        '',
-        'success'
-      );
-      
-      this.getReservas()
-    },
-    (err) => {
-      console.error(err);
-      Swal.fire("Ya te postulaste a esta oferta",  "anteriormente", 'error');
-    }
-  );
-
-
-
   }
 
   getHabitaciones(){
@@ -132,7 +111,7 @@ estado1 = true;
     this.reservaService.selectedReserva = reserva;
   }
 
-  deleteReserva(_id:string){
+  deleteReserva(_id:any){
     Swal.fire({
       title: 'Estas seguro de eliminar esta Reserva',
       showDenyButton: true,

@@ -5,6 +5,11 @@ const ReservaSchema = new Schema({
     ,
     habitacion: {
        type: mongoose.Types.ObjectId, ref: 'Habitacion'
+    },codigo:{
+        type: String
+    },
+    uri: {
+        type: String
     },
     tipoReserva: {
         type: String
@@ -17,7 +22,7 @@ const ReservaSchema = new Schema({
     costoAlojamiento :{
         type: Number
     },
-    estado: {type: Boolean}
+    estado: {type: String}
         
 });
 ReservaSchema.statics ={

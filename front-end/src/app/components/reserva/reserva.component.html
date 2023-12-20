@@ -1,57 +1,85 @@
 <app-nav></app-nav>
 <br><br>
-<div class="collapse" id="collapseExample">
-  <div class="card card-body">
-    <form #reservaForm="ngForm" (ngSubmit)="reservando(reservaForm)">
-      <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="habitacionService.selectedHabitacion._id">
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Numero de Habitacion</label>
-        <input disabled type="text" name="numero" #numero="ngModel" [(ngModel)]="habitacionService.selectedHabitacion.numero" class="form-control" >
-
-      </div>
-      <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Descripcion de la Habitacion</label>
-        <textarea disabled name="descripcion" #descripcion="ngModel" [(ngModel)]="habitacionService.selectedHabitacion.descripcion" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-      </div>
-        <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Fecha Entrada</label>
-            <input type="date" name="fechaEntrada" #fechaEntrada="ngModel" [(ngModel)]="reservaService.selectedReserva.fechaEntrada" class="form-control" id="exampleFormControlTextarea1">
-          </div>
-        <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Fecha Salida</label>
-            <input type="date" name="fechaSalida" #fechaSalida="ngModel" [(ngModel)]="reservaService.selectedReserva.fechaSalida" class="form-control" id="exampleFormControlTextarea1">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Costo Alojamiento</label>
-            <input disabled type="number" step="any" name="precioDiario" #precioDiario="ngModel" [(ngModel)]="habitacionService.selectedHabitacion.precioDiario" class="form-control" >
-
-          </div>
-        <div class="card-footer">
-          <button class="btn btn-primary">Guardar</button>
-          <button  (click)="resetForm(reservaForm)" class="btn btn-dark">Limpiar</button>
-        </div>
-  </form>
-  </div>
-</div>
-  <br><br>
+<h1 class="text-center">Reservas</h1>
+  <br>
   <div class="container">
-    <div class="row" >
-        <div class="col-sm-6 mb-10 mb-sm-0" *ngFor="let habitacion of habitacionService.habitaciones">
-          <div class="card text-center">
-            <div class="card-body">
-              <h5 class="card-title">Numero {{habitacion.numero}}</h5>
-              <ul class="list-group list-group-flush">
-                <p class="card-text">{{habitacion.descripcion}} </p>
-                <li class="list-group-item"><b>Piso :</b> {{habitacion.piso}}</li>
-                <li class="list-group-item"><b>Precio Diario :</b> {{habitacion.precioDiario}}</li>
-                <li class="list-group-item"><b>Estado : </b>{{habitacion.estado}}</li>
-                <li class="list-group-item"><b>Tipo :</b> {{habitacion.tipo}}</li>
-              </ul>
-              <a (click)="editHabitacion(habitacion)" class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" class="btn btn-primary">Reservar</a>
-            </div>
-          </div>
+      <div class="row gx-5">
+      <div class="col-6">
+  <div class="card text-center">
+      <h5 class="card-title mt-2">Registre una Reserva</h5>
+      <div class="card-body">
+          
+<form #reservaForm="ngForm" (ngSubmit)="addReserva(reservaForm)">
+    <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="reservaService.selectedReserva._id">
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Numero de Habitacion</label>
+      <select name="habitacion" #habitacion="ngModel" [(ngModel)]="reservaService.selectedReserva.habitacion" class="form-select" aria-label="Default select example">
+        <option *ngFor="let habitacion of habitacionService.habitaciones" value="{{habitacion._id}}" >{{habitacion.numero}}</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Codigo Reserva</label>
+      <input type="text" name="codigo" #codigo="ngModel" [(ngModel)]="reservaService.selectedReserva.codigo" class="form-control" >
+    </div>
+
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Tipo Reserva</label>
+      <select name="tipoReserva" #tipoReserva="ngModel" [(ngModel)]="reservaService.selectedReserva.tipoReserva" class="form-control" class="form-select" aria-label="Default select example">
+        <option value="Reserva">Reserva</option>
+        <option value="Pagado">Pagado</option>
+      </select>
+    </div>
+      <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label">Fecha Entrada</label>
+          <input type="date" name="fechaEntrada" #fechaEntrada="ngModel" [(ngModel)]="reservaService.selectedReserva.fechaEntrada" class="form-control" >
         </div>
-        
+      <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label">Fecha Salida</label>
+          <input type="date" name="fechaSalida" #fechaSalida="ngModel" [(ngModel)]="reservaService.selectedReserva.fechaSalida" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Costo Alojamiento</label>
+          <input type="number" step="any" name="costoAlojamiento" #costoAlojamiento="ngModel" [(ngModel)]="reservaService.selectedReserva.costoAlojamiento" class="form-control" >
+        </div>
+
+      <div class="card-footer">
+        <button class="btn btn-primary">Guardar</button>
+        <button  (click)="resetForm(reservaForm)" class="btn btn-dark">Limpiar</button>
+      </div>
+</form>
+
+      </div>
   </div>
-  <br>
-  <br>
+  </div>
+  <div class="col-6">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Codigo Reserva</th>
+            <th scope="col">tipo Reserva</th>
+            <th scope="col">fecha Reserva</th>
+            <th scope="col">fecha Entrada</th>
+            <th scope="col">fecha Salida</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let reserva of reservaService.reservas">
+            <td> {{reserva.codigo}} </td>
+            <td> {{reserva.tipoReserva}} </td>
+            <th> {{reserva.fechaReserva}} </th>
+            <td> {{reserva.fechaEntrada}} </td>
+            <td> {{reserva.fechaSalida}} </td>
+            <td>
+                <a (click)="editReserva(reserva)">
+                    <i class="material-icons">edit</i>
+                </a>
+                <a (click)="deleteReserva(reserva._id)">
+                    <i class="material-icons">delete</i>
+                </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+</div>
+</div>

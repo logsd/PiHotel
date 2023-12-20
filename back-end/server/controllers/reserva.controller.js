@@ -7,37 +7,39 @@ reservaCtrl.getReservas = async (req,res) => {
 }
 
 reservaCtrl.createReserva = async (req,res) => {
- console.log(req.body)
-    const newReserva ={
-        cliente : req.body.cliente,
-        habitacion : req.body.habitacion,
-        tipoReserva : req.body.tipoReserva,
-        fechaReserva : req.body.fechaReserva,
-        fechaEntrada : req.body.fechaEntrada, 
-        fechaSalida: req.body.fechaSalida,
-        costoAlojamiento : req.body.costoAlojamiento,
-        estado: req.body.estado
-    };
 
-    Reserva.create (newReserva, (err, reserva)=>{
-        if(err && err.code === 11000)return res.status(409).send('La reserva ya existe!')
-        if(err) return res.status(500).send('Server error');
+    try {
+         
+        const { uri} = req.body;
+       const existeReserva = await Reserva.findOne({ uri});
+       if ( existeReserva ) {
+           return res.status(400).json({
+               ok: false,
+               msg: 'Ya esta Postulado a esta Oferta',
+               msj:'POSTULADO'
+           });
+       
+          }  
 
-        const dataReserva ={
-            cliente : reserva.cliente,
-            habitacion : reserva.habitacion,
-            tipoReserva : reserva.tipoReserva,
-            fechaReserva : reserva.fechaReserva,
-            fechaEntrada : reserva.fechaEntrada, 
-            fechaSalida: reserva.fechaSalida,
-            costoAlojamiento : reserva.costoAlojamiento,
-            estado: reserva.estado
-        }
+const reserva = new Reserva(req.body);
 
-        // response
-
-        res.send({reserva, dataReserva})
-    })
+       // GUARDAR UNA OPCION EN MongoDB
+   await reserva.save()
+           .then(data => {
+               res.json(data);
+           }).catch(err => {
+               res.status(500).json({
+                   msg: err.message
+               });
+           });
+   } catch (error) {
+       console.log(error);
+       res.status(500).json({
+           ok: false,
+           msg: 'Error inesperado... revisar logs'
+       }); 
+   }
+    
 }
 
 reservaCtrl.getReserva = async (req,res) => {

@@ -14,7 +14,7 @@ const ConsumoSchema = new Schema({
         type: Number
     },
     estado: {
-        type: Boolean
+        type: String
     }   
 });
 ConsumoSchema.statics ={

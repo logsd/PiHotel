@@ -17,17 +17,17 @@ import { ReservaComponent } from './components/reserva/reserva.component';
 
 const routes: Routes = [
   {path: '',redirectTo:'login' , pathMatch: 'full'},
-  {path: 'productos', component: ProductComponent},
-  {path: 'reserva', component: ReservaComponent},
-  {path: 'consumo', component: ConsumoComponent},
-  {path: 'habitacion', component: HabitacionComponent},
-  {path: 'metodo', component: MetodoComponent},
+  {path: 'productos', component: ProductComponent ,canActivate:[RolGuard]},
+  {path: 'reserva', component: ReservaComponent,canActivate:[RolGuard]},
+  {path: 'consumo', component: ConsumoComponent,canActivate:[RolGuard]},
+  {path: 'habitacion', component: HabitacionComponent ,canActivate:[RolGuard]},
+  {path: 'metodo', component: MetodoComponent,canActivate:[RolGuard]},
   {path: 'dashboard', component: DashboardComponent},
-  {path: 'home', component: HomeComponent},
+  {path: 'home', component: HomeComponent,canActivate:[AuthGuard,RolGuard]},
   {path: 'login', component :LoginComponent},
   {path: 'register', component :RegisterComponent},
   {path: 'users', component :UsersComponent, canActivate:[RolGuard]},
-  {path: '**', redirectTo: 'dashboard', pathMatch:'full'}
+  {path: '**', redirectTo: 'login', pathMatch:'full'}
 ];
 
 @NgModule({
